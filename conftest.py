@@ -14,3 +14,6 @@ def setup():
     driver = webdriver.Chrome(service=ser, options=op)
     driver.get("https://rahulshettyacademy.com/angularpractice/")
     driver.maximize_window()
+    yield
+    driver.close()
+    return driver
