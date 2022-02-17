@@ -8,12 +8,12 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 @pytest.fixture(scope="class")
-def setup():
+def setup(request):
     ser = Service('C:\WebDriver\Bin\chromedriver.exe')
     op = webdriver.ChromeOptions()
     driver = webdriver.Chrome(service=ser, options=op)
     driver.get("https://rahulshettyacademy.com/angularpractice/")
     driver.maximize_window()
+    request.cls.driver = driver
     yield
     driver.close()
-    return driver
