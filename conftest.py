@@ -13,9 +13,14 @@ def pytest_addoption(parser):
 
 @pytest.fixture(scope="class")
 def setup(request):
-    ser = Service('C:\WebDriver\Bin\chromedriver.exe')
-    op = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ser, options=op)
+    browser_name=request.config.getOption("browser_name")
+    if browser_name == "chrome":
+        ser = Service('C:\WebDriver\Bin\chromedriver.exe')
+        op = webdriver.ChromeOptions()
+        driver = webdriver.Chrome(service=ser, options=op)
+    elif browser_name == "firefox":
+        # write firefox invocation
+
     driver.get("https://rahulshettyacademy.com/angularpractice/")
     driver.maximize_window()
     request.cls.driver = driver
